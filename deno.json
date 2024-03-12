@@ -1,6 +1,7 @@
 {
   "lock": false,
   "tasks": {
-    "start": "deno run --allow-read --allow-net --allow-env=DENO_KV_ACCESS_TOKEN --unstable-kv --watch main.ts"
+    "start": "deno run --allow-read --allow-net --allow-env=DENO_KV_ACCESS_TOKEN --unstable-kv --watch main.ts --mode=prod",
+    "start-sit": "deno run --allow-read --allow-net --allow-env=DENO_KV_ACCESS_TOKEN --unstable-kv --watch main.ts --mode=dev"
   }
 }
