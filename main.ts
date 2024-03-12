@@ -4,7 +4,7 @@ import "https://deno.land/std@0.219.0/dotenv/load.ts";
 Deno.env.get("DENO_KV_ACCESS_TOKEN");
 
 const app = new Hono();
-const kv = await Deno.openKv('https://api.deno.com/databases/156ec23d-bf86-493c-95e5-3fd1ea2fae8d/connect');
+const kv = await Deno.openKv();
 
 // Redirect root URL
 app.get("/", (c) => c.redirect("/books"));
