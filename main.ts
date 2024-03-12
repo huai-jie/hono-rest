@@ -3,8 +3,20 @@ import "https://deno.land/std@0.219.0/dotenv/load.ts";
 
 Deno.env.get("DENO_KV_ACCESS_TOKEN");
 
+const args = Deno.args;
+let _mode = "prod";
+
+// Search for an argument that starts with "--mode="
+const modeArg = args.find((arg) => arg.startsWith("--mode="));
+if (modeArg) {
+  // Extract the environment value from the argument
+  _mode = modeArg.split("=")?.[1];
+}
+
 const app = new Hono();
-const kv = await Deno.openKv();
+const kv = _mode == "prod" ? await Deno.openKv() : await Deno.openKv(
+  "https://api.deno.com/databases/156ec23d-bf86-493c-95e5-3fd1ea2fae8d/connect",
+);
 
 // Redirect root URL
 app.get("/", (c) => c.redirect("/books"));
